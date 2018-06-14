@@ -1,0 +1,744 @@
+<html>
+<head>
+	<title> THE Calculator for HCI class v1 </title>
+	<style type = "text/css">
+	    h1 {
+            font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+            font-size: 16px;
+            padding: 5px;
+            text-align: left;
+            text-transform: uppercase;
+            color: #ff0000;
+            letter-spacing: .1em;
+        }
+		
+		#cal-body {
+            font-size: 0;
+            width: 400px;
+            background-color: #6666ff;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+		}
+		
+		#cal-result {
+            width: 385px;
+            height: 50px;
+            padding: 5px;
+            background-color: #b3ffb3;
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+            overflow: hidden;
+            font: 20px digital;
+        }
+
+		#cal-result2 {
+            width: 385px;
+            height: 50px;
+            margin-bottom: 15px;
+            padding: 5px;
+            background-color: #b3ffb3;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            font: 20px digital;
+        }
+		
+		#cal-Graph {
+			width: 385px;
+            height: 325px;
+			position: absolute;
+			z-index: 3;
+            margin-bottom: 15px;
+            padding: 5px;
+            background-color: #F7FE2E;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            font: 20px digital;
+			border-radius: 10px;
+		}
+		
+		#cal-Menu {
+			width: 390px;
+            height: 375px;
+			position: absolute;
+			z-index: 3;
+            margin-bottom: 5px;
+            padding: 5px;
+            background-color: #DA81F5;
+            justify-content: flex-start;
+            align-items: flex-start;
+			flex-wrap: wrap;
+            overflow: hidden;
+            font: 10px digital;
+			border-radius: 10px;
+		}
+		
+		.cal-box1 {
+			display:inline-block;
+            background-color: #4dc3ff;
+			bordercolor="red";
+            padding: 3px 0px 3px 0px;
+            margin: 3.5px;
+            border-radius: 10px;
+		}
+		
+		.key {
+            display: inline-flex;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #a1a1a1, 0 2px 5px rgba(0, 0, 0, .75);
+            font: bold 20px sans-serif;
+		}
+		
+        .key-menu {
+            width: 70px;
+            height: 55px;
+            background-color: #001a1a;
+            display: inline-flex;
+            margin: 10px;
+            padding: 5px;
+			border-radius: 50%;
+        }
+		
+		.yellow {
+			color: #e6e600;
+		}
+		.Purple {
+			color: #cc33ff;
+		}
+		.Red {
+			color: #ff1a1a;
+		}
+		
+		.gm1 {
+			left: 10px;
+			right: 50px;
+			top: 270px;
+			down: 0px;
+		}
+		.gm2 {
+			left: 100px;
+			right: 50px;
+			top: 270px;
+			down: 0px;
+		}
+		.gm3 {
+			left: 310px;
+			right: 50px;
+			top: 270px;
+			down: 0px;
+		}
+		.gm4 {
+			left: 20px;
+			right: 50px;
+			top: 10px;
+			down: 0px;
+		}
+		.gm5 {
+			left: 90px;
+			right: 50px;
+			top: 10px;
+			down: 0px;
+		}
+		
+        .key-var {
+            width: 46.5px;
+            height: 20px;
+            background-color: #eeeeee;
+            margin: 10px 10px 10px 10px;
+            padding: 5px 0px 5px 0px;
+            border-radius: 10px;
+        }
+
+        .key-spe {
+            width: 35px;
+            height: 25px;
+            background-color: #eeeeee;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 10px;
+        }
+		
+		.key-spe2 {
+            width: 35px;
+            height: 25px;
+            background-color: #eeeeee;
+            margin: 6px;
+            padding: 5px;
+            border-radius: 10px;
+        }
+		
+        .key-num {
+            width: 50px;
+            height: 30px;
+            background-color: #eeeeee;
+            margin: 10px;
+            padding: 5;
+            border-radius: 4px;
+        }
+		
+		.key-graph {
+			position: absolute;
+			z-index: 4;
+            width: 50px;
+            height: 30px;
+            background-color: #FE642E;
+            margin: 10px;
+            padding: 5;
+			font: 18px sans-serif;
+            border-radius: 50%;
+        }
+		
+		.key-graph-fg {
+			position: absolute;
+			z-index: 4;
+            width: 50px;
+            height: 30px;
+            background-color: #2EFEF7;
+            margin: 10px;
+            padding: 5;
+			font: 18px sans-serif;
+            border-radius: 100%;
+        }
+		
+		.key:active {
+            background-color: #a1a1a1;
+            box-shadow: 0 5px #666;
+            transform: translateY(5px);
+        }
+		
+		.tag {
+			color: #cc33ff;
+			font: bold 20px sans-serif;
+		}
+		
+		#first {}
+		#second {}
+		
+		.menu1 {
+			width: 40px;
+            height: 30px;
+			margin-left: 7px;
+			margin-right: 7px;
+			margin-down: 7px;
+            padding: 5px;
+			font: 17px sans-serif;
+            border-radius: 10px;
+		}
+		
+		.menu2 {
+			width: 90px;
+            height: 30px;
+			margin-left: 7px;
+			margin-right: 7px;
+            padding: 5px;
+			font: 17px sans-serif;
+            border-radius: 10px;
+		}
+		
+		.menu-g1 {
+			background-color: #58FA58;
+			cursor: Default;
+			width: 365px;
+            height: 5px;
+			margin: 2px 9px 2px;
+			padding: 5px;
+			font: bold; 17px sans-serif;
+            border-radius: 10px;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="cal-body">
+	<h1> THE Calculator Only for me v2 </h1>
+	<div id="cal-result"> </div>
+	<div id="cal-result2"> </div>
+	
+	<div id="Zero">
+	<span class="key key-menu yellow">Shift</span>
+	<span class="key key-menu Purple">Alpha</span>
+	<span class="key key-menu Red">Menu</span>
+	<span class="key key-menu Red">On/Off</span> </div>
+	
+	<div id="first">
+	<span class="key key-var">x</span>
+	<span class="key key-var">y</span>
+	<span class="key key-var">z</span>
+	<span class="key key-var">f(x)</span>
+	<span class="key key-var">g(x)</span>
+	<span class="key key-var">θ</span> </div>
+	
+	<div id="second">
+	<div class="cal-box1">
+	<span class="key key-spe">sin</span>
+	<span class="key key-spe">cos</span>
+	<span class="key key-spe">tan</span> </div>
+	
+	<div class="cal-box1">
+	<span class="key key-spe">exp</span>
+	<span class="key key-spe">log</span>
+	<span class="key key-spe">√</span>
+	<span class="key key-spe">∫</span> </div>
+	
+	<span class="key key-spe2">π</span>
+	<span class="key key-spe2 c0">e</span>
+	<span class="key key-spe2 c1">||</span>
+	<span class="key key-spe2 c2">(</span>
+	<span class="key key-spe2 c3">)</span>
+	<span class="key key-spe2">^</span>
+	<span class="key key-spe2">%</span>
+	
+	<span class="key key-spe2">></span>
+	<span class="key key-spe2"><</span>
+	<span class="key key-spe2">>=</span>
+	<span class="key key-spe2"><=</span>
+	<span class="key key-spe2">==</span>
+	<span class="key key-spe2">!=</span>
+	<span class="key key-spe2">,</span>
+	</div>
+	
+	<span class="key key-num">7</span>
+	<span class="key key-num">8</span>
+	<span class="key key-num">9</span>
+	<span class="key key-num">DEL</span>
+	<span class="key key-num">AC</span>
+	<div></div>
+	<span class="key key-num">4</span>
+	<span class="key key-num">5</span>
+	<span class="key key-num">6</span>
+	<span class="key key-num">*</span>
+	<span class="key key-num">÷</span>
+	<div></div>
+	<span class="key key-num">1</span>
+	<span class="key key-num">2</span>
+	<span class="key key-num">3</span>
+	<span class="key key-num">+</span>
+	<span class="key key-num">-</span>
+	<div></div>
+	<span class="key key-num">0</span>
+	<span class="key key-num">.</span>
+	<span class="key key-num">Graph</span>
+	<span class="key key-num">=</span>
+	<span class="key key-num">RUN</span>
+	<div></div>
+	</div>
+	
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+<script src='math.js' type='text/javascript'></script>
+
+<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var parser = math.parser();
+
+		var displayValue = '0';
+		var displayResult = '0';
+		var box = '0';
+		var displayA = '';
+		
+		var Shift = false;
+		var Alpha = false;
+		var onoff = true;
+		var Graph = false;
+		var Menu = false;
+		
+		var GraphF = '';
+		var GraphG = '';
+		var clickF = false;
+		var clickG = false;
+		var func1 = '';
+		var func2 = '';
+		
+		var LL = -10;
+		var RR = 10;
+		
+		var GraphBOX = '<div id="cal-Graph"> </div>';
+		var MenuBOX = '<div id="cal-Menu"> </div>';
+		var menu_text1 = '<span class="key menu-g1"> </span>';
+		var menu1 = '<span class="key key-num menu1">asin</span>';
+		var menu2 = '<span class="key key-num menu1">acos</span>';
+		var menu3 = '<span class="key key-num menu1">atan</span>';
+		var menu4 = '<span class="key key-num menu1">sinh</span>';
+		var menu5 = '<span class="key key-num menu1">cosh</span>';
+		var menu6 = '<span class="key key-num menu1">tanh</span>';
+		var menu7 = '<span class="key key-num menu1">asinh</span>';
+		var menu8 = '<span class="key key-num menu1">acosh</span>';
+		var menu9 = '<span class="key key-num menu1">atanh</span>';
+		var menu10 = '<span class="key key-num menu1">csc</span>';
+		var menu11 = '<span class="key key-num menu1">sec</span>';
+		var menu12 = '<span class="key key-num menu1">cot</span>';
+		var menu13 = '<span class="key key-num menu1">acsc</span>';
+		var menu14 = '<span class="key key-num menu1">asec</span>';
+		var menu15 = '<span class="key key-num menu1">acot</span>';
+		var menu16 = '<span class="key key-num menu1">acsch</span>';
+		var menu17 = '<span class="key key-num menu1">asech</span>';
+		var menu18 = '<span class="key key-num menu1">acoth</span>';
+		
+		var menu19 = '<span class="key key-num menu1">dot</span>';
+		var menu20 = '<span class="key key-num menu1">cross</span>';
+		var menu21 = '<span class="key key-num menu1">diag</span>';
+		var menu22 = '<span class="key key-num menu1">kron</span>';
+		var menu23 = '<span class="key key-num menu1">matrix</span>';
+		var menu24 = '<span class="key key-num menu1">sparse</span>';
+		var menu25 = '<span class="key key-num menu2">dotDivide</span>';
+		var menu26 = '<span class="key key-num menu2">dotMultiply</span>';
+		var menu27 = '<span class="key key-num menu1">norm</span>';
+		var menu28 = '<span class="key key-num menu1">concat</span>';
+		var menu29 = '<span class="key key-num menu1">det</span>';
+		var menu30 = '<span class="key key-num menu1">inv</span>';
+		var menu31 = '<span class="key key-num menu1">trace</span>';
+		var menu32 = '<span class="key key-num menu2">transpose</span>';
+		var menu33 = '<span class="key key-num menu1">zeros</span>';
+		
+		var menu_next = '<span class="key key-num menu1">Next</span>';
+		
+		var gmenu1 = '<span class="key key-graph gm1 gmenu">moveL</span>';
+		var gmenu2 = '<span class="key key-graph gm2 gmenu">moveR</span>';
+		var gmenu3 = '<span class="key key-graph gm3 gmenu">Draw</span>';
+		var gmenu4 = '<span class="key key-graph-fg gm4 gmenu-fg">F</span>';
+		var gmenu5 = '<span class="key key-graph-fg gm5 gmenu-fg">G</span>';
+		
+		$('#cal-result').text(displayValue);
+		$('#cal-result').text(displayResult);
+		
+		$(document).on("click",".menu1", function(){
+			if(displayValue == '0' || displayValue == '.')
+				displayValue = '';
+			displayValue += $(this).text();
+			$('#cal-result').text(displayValue);
+		})
+		
+		$(document).on("click",".menu2", function(){
+			if(displayValue == '0' || displayValue == '.')
+				displayValue = '';
+			displayValue += $(this).text();
+			$('#cal-result').text(displayValue);
+		})
+		
+		$(document).on("click",".gmenu", function(){
+			if($(this).text() == 'Draw')
+			{
+				LL = -10;
+				RR = 10;
+				draw(GraphF, GraphG);
+			}
+			else if($(this).text() == 'moveL')
+			{
+				LL -= 1;
+				RR -= 1;
+				draw(GraphF, GraphG);
+			}
+			else if($(this).text() == 'moveR')
+			{
+				LL += 1;
+				RR += 1;
+				draw(GraphF, GraphG);
+			}
+			$('#cal-result').text(displayValue);
+		})
+		
+		$(document).on("click",".gmenu-fg", function(){
+			if($(this).text() == 'F')
+			{
+				if (clickF == false)
+				{
+					GraphF = func1;
+					clickF = true;
+					$(".gm4").css('background-color', '#FE2E2E');
+				}
+				else
+				{
+					GraphF = "";
+					clickF = false;
+					$(".gm4").css('background-color', '#2EFEF7');
+				}
+			}
+			else if($(this).text() == 'G')
+			{
+				if (clickG == false)
+				{
+					GraphG = func2;
+					clickG = true;
+					$(".gm5").css('background-color', '#FE2E2E');
+				}
+				else
+				{
+					GraphG = "";
+					clickG = false;
+					$(".gm5").css('background-color', '#2EFEF7');
+				}
+			}
+			$('#cal-result').text(displayValue);
+		})
+		
+		$('.key').each(function(index, key){
+			$(this).click(function(e){
+				if(onoff == true)
+				{
+					if($(this).text() == 'RUN')
+					{
+						try
+						{
+							if (displayValue.indexOf('f(x)') != -1)
+							{
+								var a = displayValue;
+								var b = a.split("=");
+								func1 = b[1];
+							}
+							else if (displayValue.indexOf('g(x)') != -1)
+							{
+								var a = displayValue;
+								var b = a.split("=");
+								func2 = b[1];
+							}
+							displayValue = parser.eval(displayValue).toString();
+							var tokens = displayValue.split(' ');
+							if(tokens[0] == 'function')
+							{
+								displayValue = tokens[0];
+							}
+							displayResult = displayValue;
+							$('#cal-result2').text(displayResult);
+							displayValue = displayResult;
+							if(displayValue == 'function')
+							{
+								displayValue = '';
+								displayResult = '';
+							}
+						}
+						catch (e)
+						{
+							displayValue = '0';
+							if(displayValue != 'function')
+							{
+								$('#cal-result2').text(e);
+							}
+						}
+					}
+					else if($(this).text() == 'On/Off')
+					{/*
+						onoff = false;
+						*/
+					}
+					else if($(this).text() == 'Shift')
+					{/*
+						if(Shift == true) {Shift = false;}
+						else {Shift = true;}
+						if(Alpha == true) {Alpha = false;}
+						*/
+					}
+					else if($(this).text() == 'Alpha')
+					{
+						if(Alpha == true)
+						{
+							$(".c1").text('||'); $(".c1").css('background-color', '#FFFFFF');
+							$(".c2").text('('); $(".c2").css('background-color', '#FFFFFF');
+							$(".c3").text(')'); $(".c3").css('background-color', '#FFFFFF');
+							Alpha = false;
+						}
+						else
+						{
+							$(".c1").text(';'); $(".c1").css('background-color', '#cc33ff');
+							$(".c2").text('['); $(".c2").css('background-color', '#cc33ff');
+							$(".c3").text(']'); $(".c3").css('background-color', '#cc33ff');
+							Alpha = true;
+						}
+						if(Shift == true) {Shift = false;}
+					}
+					else if($(this).text() == 'Menu')
+					{
+						if(Menu == true)
+						{
+							$("#cal-Menu").remove();
+							Menu = false;
+						}
+						else
+						{
+							$("#Zero").after(MenuBOX);
+							$("#cal-Menu").append(menu1);
+							$("#cal-Menu").append(menu2);
+							$("#cal-Menu").append(menu3);
+							$("#cal-Menu").append(menu4);
+							$("#cal-Menu").append(menu5);
+							$("#cal-Menu").append(menu6);
+							$("#cal-Menu").append(menu7);
+							$("#cal-Menu").append(menu8);
+							$("#cal-Menu").append(menu9);
+							$("#cal-Menu").append(menu10);
+							$("#cal-Menu").append(menu11);
+							$("#cal-Menu").append(menu12);
+							$("#cal-Menu").append(menu13);
+							$("#cal-Menu").append(menu14);
+							$("#cal-Menu").append(menu15);
+							$("#cal-Menu").append(menu16);
+							$("#cal-Menu").append(menu17);
+							$("#cal-Menu").append(menu18);
+							$("#cal-Menu").append(menu_text1);
+							$("#cal-Menu").append(menu19);
+							$("#cal-Menu").append(menu20);
+							$("#cal-Menu").append(menu21);
+							$("#cal-Menu").append(menu22);
+							$("#cal-Menu").append(menu23);
+							$("#cal-Menu").append(menu24);
+							$("#cal-Menu").append(menu25);
+							$("#cal-Menu").append(menu26);
+							$("#cal-Menu").append(menu27);
+							$("#cal-Menu").append(menu28);
+							$("#cal-Menu").append(menu29);
+							$("#cal-Menu").append(menu30);
+							$("#cal-Menu").append(menu31);
+							$("#cal-Menu").append(menu32);
+							$("#cal-Menu").append(menu33);
+							Menu = true;
+						}
+					}
+					else
+					{
+						if(displayValue == '0' || displayValue == '.')
+								displayValue = '';
+						if($(this).text() == 'AC')
+						{
+							displayValue = '0';
+							displayResult = '0';
+							box = '';
+							$('#cal-result').text(displayValue);
+							$('#cal-result2').text(displayResult);
+						}
+						else if($(this).text() == 'DEL')
+						{
+							displayValue = displayValue.slice(0, -1);
+							$('#cal-result').text(displayValue);
+						}
+						else if($(this).text() == 'Graph')
+						{
+							if(Graph == true)
+							{
+								$("#cal-Graph").remove();
+								Graph = false;
+							}
+							else
+							{
+								$("#first").after(GraphBOX);
+								$("#cal-Graph").append(gmenu1);
+								$("#cal-Graph").append(gmenu2);
+								$("#cal-Graph").append(gmenu3);
+								$("#cal-Graph").append(gmenu4);
+								$("#cal-Graph").append(gmenu5);
+								Graph = true;
+							}
+						}
+						else if($(this).text() == '√') { displayValue += 'sqrt'; $('#cal-result').text(displayValue); }
+						else if($(this).text() == '||') { displayValue += 'abs'; $('#cal-result').text(displayValue); }
+						else if($(this).text() == 'π') { displayValue += 'pi'; $('#cal-result').text(displayValue); }
+						else if($(this).text() == '∫') { displayValue += ''; }
+						else if($(this).text() == '÷') { displayValue += '/'; $('#cal-result').text(displayValue); }
+						else
+						{
+							displayValue += $(this).text();
+							$('#cal-result').text(displayValue);
+						}
+						var node = math.parse(displayValue);
+					}
+					e.preventDefault()
+				}
+				else { onoff = true; }
+			})
+		})
+		
+		function draw(func1, func2) {
+			fun1p = false;
+			fun2p = false;
+			try {
+				if(func1 != "") {
+					fun1p = true;
+					var expression1 = func1;
+					var expr1 = math.compile(expression1);
+
+					var xValues1 = math.range(LL, RR, 0.5).toArray();
+					var yValues1 = xValues1.map(function (x) {
+						return expr1.eval({x: x});
+					});
+				}
+				if(func2 != "") {
+					fun2p = true;
+					var expression2 = func2;
+					var expr2 = math.compile(expression2);
+
+					var xValues2 = math.range(LL, RR, 0.5).toArray();
+					var yValues2 = xValues2.map(function (x) {
+						return expr2.eval({x: x});
+					});
+				}
+				
+				if(fun1p == true) {
+					var trace1 = {
+							x: xValues1,
+							y: yValues1,
+							type: 'lines',
+							name: 'f(x)'
+						};
+				}
+				if(fun2p == true) {
+					var trace2 = {
+							x: xValues2,
+							y: yValues2,
+							type: 'lines',
+							name: 'g(x)'
+						};
+				}
+				if(fun1p == true && fun2p == false) {
+					var data = [trace1];
+					Plotly.newPlot('cal-Graph', data);
+				}
+				else if(fun1p == false && fun2p == true) {
+					var data = [trace2];
+					Plotly.newPlot('cal-Graph', data);
+				}
+				else if(fun1p == true && fun2p == true) {
+					var data = [trace1, trace2];
+					Plotly.newPlot('cal-Graph', data);
+				}
+				else
+					alert("f(x) 혹은 g(x)를 먼저 선택해주세요.");
+			}
+			catch (err) {
+				console.error(err);
+				alert(err);
+			}
+		}
+	})
+</script>					
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
